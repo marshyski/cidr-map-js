@@ -1,0 +1,29 @@
+{
+  "name": "cidr-map-js",
+  "version": "1.0.0",
+  "description": "Highchart + Node + Koa to render CIDR blocks for each country",
+  "main": "index.js",
+  "dependencies": {
+    "koa": "^2.7.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "standard --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marshyski/cidr-map-js.git"
+  },
+  "author": "marshyski",
+  "license": "Apache-2.0",
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/marshyski/cidr-map-js/issues"
+  },
+  "homepage": "https://github.com/marshyski/cidr-map-js#readme"
+}

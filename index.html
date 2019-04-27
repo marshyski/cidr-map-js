@@ -1,0 +1,79 @@
+<html>
+<head>
+    <title>CIDR Map</title>
+    <link rel="stylesheet" type="text/css" href="//github.com/downloads/lafeber/world-flags-sprite/flags32.css" />
+    <style>
+        #container {
+            height: 550px;
+            min-width: 750px;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+        .highcharts-tooltip>span {
+            padding: 10px;
+            white-space: normal !important;
+            width: 200px;
+        }
+        .f32 .flag {
+            vertical-align: middle !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="row">
+        <br>
+        <br>
+        <div id="container"></div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.highcharts.com/maps/highmaps.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/data.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/offline-exporting.js"></script>
+    <script src="https://code.highcharts.com/mapdata/custom/world.js"></script>
+    <script>
+        $.getJSON('/data', function(data) {
+            Highcharts.mapChart('container', {
+                chart: {
+                    map: 'custom/world'
+                },
+                title: {
+                    text: 'CIDR Map'
+                },
+                mapNavigation: {
+                    enabled: false,
+                    buttonOptions: {
+                        verticalAlign: 'bottom'
+                    }
+                },
+                tooltip: {
+                    backgroundColor: 'none',
+                    borderWidth: 0,
+                    shadow: false,
+                    useHTML: true,
+                    outside: true,
+                    padding: 0,
+                    hideDelay: 600000,
+                    pointFormat: `<span class="f32"><span class="flag {point.properties.hc-key}"></span></span> {point.name}<br><span style="font-size:16px">{point.values}</span>`,
+                    positioner: function() {
+                        return {
+                            x: 350,
+                            y: 100
+                        }
+                    }
+                },
+                series: [{
+                    data: data,
+                    joinBy: ['iso-a2', 'hc_key'],
+                    name: 'CIDRs',
+                    states: {
+                        hover: {
+                            color: 'purple'
+                        }
+                    }
+                }]
+            })
+        })
+    </script>
+</body>
+</html>
