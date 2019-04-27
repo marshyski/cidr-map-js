@@ -9,11 +9,11 @@ const path = './all-zones'
 let data = []
 
 // Load data from path
-files = fs.readdirSync(path)
-for (e of files) {
-    const hc_key = e.split('.')[0].toUpperCase()
-    const values = fs.readFileSync(path+'/'+e).toString().replace(/\n/g, '<br>')
-    data.push({hc_key: hc_key, values: values})
+const files = fs.readdirSync(path)
+for (const e of files) {
+  const hcKey = e.split('.')[0].toUpperCase()
+  const values = fs.readFileSync(path + '/' + e).toString().replace(/\n/g, '<br>')
+  data.push({ hc_key: hcKey, values: values })
 }
 
 // Logger
@@ -25,14 +25,14 @@ app.use(async (ctx, next) => {
 
 // index.html & /data
 app.use(async ctx => {
-  if (ctx.URL.pathname == "/data") {
-    ctx.type = 'application/json; charset=utf-8';
+  if (ctx.URL.pathname === '/data') {
+    ctx.type = 'application/json; charset=utf-8'
     ctx.body = JSON.stringify(data)
     return
   }
-  ctx.type = 'text/html; charset=utf-8';
+  ctx.type = 'text/html; charset=utf-8'
   ctx.body = fs.createReadStream('./index.html')
 })
 
-console.log("Server listening on 8000")
+console.log('Server listening on 8000')
 app.listen(8000)
